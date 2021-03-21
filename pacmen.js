@@ -22,10 +22,13 @@ function makePac() {
   newimg.width = 100;
 
   // TODO: set position here
+newimg.style.left = "10px";
+newimg.style.right = "10px";
 
 
   // TODO add new Child image to game
-  game.appendChild(/* TODO: add parameter */);
+  game.appendChild(newimg);
+ 
 
   // return details in an object
   return {
@@ -50,8 +53,58 @@ function update() {
 
 function checkCollisions(item) {
   // TODO: detect collision with all walls and make pacman bounce
-  
+  var canvasWidth = 1424;
+  var canvasHeight = 445;
+  var ballRadius = item.width;
+  var x = item.position.x;
+  var y = item.position.y;
+
+  if((x + 100) > canvasWidth) {
+   var tempt = (x + ballRadius) - canvasWidth;
+   item.position.x = canvasWidth - tempt - ballRadius;
+  }
+  if((y + 100) > canvasHeight) {
+   var tempt = (y + ballRadius) - canvasHeight;
+   item.position.y = canvasHeight - tempt - ballRadius;
+ }
 }
+
+// var ballx = 600;
+// var bally = 300;
+// var ballwidth = 50;
+// var ballheight = 50;
+
+// function setup() {
+//   createCancas(WindowWidth, WinowHeight);
+
+//   function draw() {
+//     background (0);
+//     noStroke();
+//     fill (255);
+    
+//     ballx = ballx + (balldirectionx*ballspeed);
+//     bally = bally + (balldirectiony*ballspeed);
+
+//     ellispse(ballx, bally, ballwidth, ballheight);
+
+//     if(ballx < 0) {//off the left of the screen
+//       balldirectionx = balldirectionx*-1;
+//     }
+
+//     if(ballx < width) {//off the right of the screen
+//       balldirectionx = balldirectionx*-1;
+//     }
+
+//     if(bally < 0) {//off the top of the screen
+//       balldirectiony = balldirectiony*-1;
+//     }
+
+//     if(bally < height) {//off the bottom of the screen
+//       balldirectiony = balldirectiony*-1;
+//     }
+
+//   }
+
 
 function makeOne() {
   pacMen.push(makePac()); // add a new PacMan
@@ -61,3 +114,4 @@ function makeOne() {
 if (typeof module !== 'undefined') {
   module.exports = { checkCollisions, update, pacMen };
 }
+
